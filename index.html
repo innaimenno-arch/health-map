@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта здоровья — Ольга Кокоева</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1B3A2D;
+    --green-mid: #2D5A42;
+    --green-light: #4A7C5E;
+    --cream: #F7F3EE;
+    --cream-dark: #EDE7DC;
+    --orange: #E8711A;
+    --orange-soft: #F4A261;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #7A7A7A;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Geologica', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--green-deep);
+    padding: 60px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(74,124,94,0.15);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(232,113,26,0.08);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange-soft);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--orange-soft);
+  }
+
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin: 0 auto 8px;
+    line-height: 1.6;
+  }
+
+  .hero-author {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-author-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .hero-author span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.5px;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--green-deep);
+    padding: 0 24px 32px;
+  }
+
+  .progress-bar-track {
+    max-width: 560px;
+    margin: 0 auto;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--orange);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  .progress-text {
+    max-width: 560px;
+    margin: 8px auto 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* QUIZ CONTAINER */
+  .quiz-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .question-block {
+    display: none;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .question-block.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 26px);
+    color: var(--green-deep);
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+
+  .q-sub {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 18px;
+    background: var(--white);
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    color: var(--text-dark);
+    line-height: 1.4;
+    text-align: left;
+    width: 100%;
+    position: relative;
+  }
+
+  .option:hover {
+    border-color: var(--green-light);
+    background: #F0F7F3;
+    transform: translateX(3px);
+  }
+
+  .option.selected {
+    border-color: var(--green-deep);
+    background: #EBF3EE;
+  }
+
+  .option.selected .opt-check {
+    background: var(--green-deep);
+    border-color: var(--green-deep);
+  }
+
+  .option.selected .opt-check::after {
+    content: '✓';
+    color: white;
+    font-size: 11px;
+  }
+
+  .opt-check {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+
+  /* multi-select variant */
+  .option.multi .opt-check {
+    border-radius: 5px;
+  }
+
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    align-items: center;
+  }
+
+  .btn-back {
+    padding: 14px 20px;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-mid);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Geologica', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover {
+    border-color: var(--green-light);
+    color: var(--green-deep);
+  }
+
+  .btn-next {
+    flex: 1;
+    padding: 16px 24px;
+    background: var(--green-deep);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Geologica', sans-serif;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-next:hover {
+    background: var(--green-mid);
+    transform: translateY(-1px);
+  }
+
+  .btn-next:disabled {
+    background: var(--cream-dark);
+    color: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* RESULT */
+  .result-block {
+    display: none;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .result-block.active {
+    display: block;
+  }
+
+  .result-header {
+    background: var(--green-deep);
+    margin: -40px -24px 0;
+    padding: 40px 24px 36px;
+    text-align: center;
+  }
+
+  .result-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange-soft);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .result-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .result-body {
+    padding: 36px 0 0;
+  }
+
+  .result-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--green-deep);
+  }
+
+  .result-section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .result-section p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-dark);
+  }
+
+  .result-signals {
+    background: #EBF3EE;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .result-signals-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .signal-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+
+  .signal-dot {
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    border-radius: 50%;
+    background: var(--green-deep);
+    margin-top: 6px;
+  }
+
+  /* CTA BLOCK */
+  .cta-block {
+    background: var(--green-deep);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .cta-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  .btn-cta-main {
+    display: block;
+    width: 100%;
+    padding: 17px 24px;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Geologica', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+  }
+
+  .btn-cta-main:hover {
+    background: #D4641A;
+    transform: translateY(-1px);
+  }
+
+  .btn-cta-secondary {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Geologica', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+
+  .btn-cta-secondary:hover {
+    color: rgba(255,255,255,0.8);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--text-light);
+    font-size: 12px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream-dark);
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .footer a {
+    color: var(--green-light);
+    text-decoration: none;
+  }
+
+  /* LOADING */
+  .loading-block {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .loading-block.active {
+    display: block;
+  }
+
+  .loader-ring {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--cream-dark);
+    border-top-color: var(--green-deep);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+
+  .loading-sub {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  @media (max-width: 480px) {
+    .quiz-wrap { padding: 32px 20px 60px; }
+    .result-header { margin: -32px -20px 0; padding: 32px 20px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Ольга Кокоева · Нутрициолог</div>
+  <h1>Карта здоровья.<br><em>Проверь себя.</em></h1>
+  <p>8 вопросов, которые заменят год хождения по врачам</p>
+  <div class="hero-author">
+    <div class="hero-author-dot"></div>
+    <span>22 года в медицине · нутрициолог · нутрициолог-реаниматолог</span>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-text" id="progressText">Вопрос 1 из 8</div>
+</div>
+
+<div class="quiz-wrap">
+
+  <!-- Q1 -->
+  <div class="question-block active" id="q1">
+    <div class="q-number">01 / 08</div>
+    <div class="q-text">Сколько вам лет?</div>
+    <div class="options" data-q="q1" data-type="single">
+      <button class="option" data-val="under35">
+        <span class="opt-check"></span>До 35
+      </button>
+      <button class="option" data-val="35-44">
+        <span class="opt-check"></span>35–44
+      </button>
+      <button class="option" data-val="45-60">
+        <span class="opt-check"></span>45–60
+      </button>
+      <button class="option" data-val="over60">
+        <span class="opt-check"></span>Старше 60
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-next" id="next1" disabled onclick="goNext(2)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block" id="q2">
+    <div class="q-number">02 / 08</div>
+    <div class="q-text">Что сейчас больше всего описывает вашу ситуацию?</div>
+    <div class="options" data-q="q2" data-type="single">
+      <button class="option" data-val="mama">
+        <span class="opt-check"></span>Я мама, дети подросли — хочу наконец заняться собой
+      </button>
+      <button class="option" data-val="diagnosis">
+        <span class="opt-check"></span>У меня есть диагноз или тревожные анализы — хочу понять, что делать
+      </button>
+      <button class="option" data-val="hormones">
+        <span class="opt-check"></span>Тело изменилось после 40 — вес, энергия, сон, гормоны
+      </button>
+      <button class="option" data-val="unknown">
+        <span class="opt-check"></span>Просто чувствую, что что-то не так — но не знаю что именно
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(1)">← Назад</button>
+      <button class="btn-next" id="next2" disabled onclick="goNext(3)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block" id="q3">
+    <div class="q-number">03 / 08</div>
+    <div class="q-text">Как вы спите?</div>
+    <div class="options" data-q="q3" data-type="single">
+      <button class="option" data-val="sleep_good">
+        <span class="opt-check"></span>Сплю хорошо, высыпаюсь
+      </button>
+      <button class="option" data-val="sleep_hard">
+        <span class="opt-check"></span>Засыпаю с трудом или просыпаюсь ночью
+      </button>
+      <button class="option" data-val="sleep_tired">
+        <span class="opt-check"></span>Сплю достаточно, но просыпаюсь уставшей
+      </button>
+      <button class="option" data-val="sleep_broken">
+        <span class="opt-check"></span>Режим сбит полностью
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(2)">← Назад</button>
+      <button class="btn-next" id="next3" disabled onclick="goNext(4)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block" id="q4">
+    <div class="q-number">04 / 08</div>
+    <div class="q-text">Что происходит с весом?</div>
+    <div class="options" data-q="q4" data-type="single">
+      <button class="option" data-val="weight_ok">
+        <span class="opt-check"></span>Стабильный, меня устраивает
+      </button>
+      <button class="option" data-val="weight_up">
+        <span class="opt-check"></span>Растёт, хотя я ем не больше чем раньше
+      </button>
+      <button class="option" data-val="weight_stuck">
+        <span class="opt-check"></span>Не могу сдвинуть с места несмотря на усилия
+      </button>
+      <button class="option" data-val="weight_jump">
+        <span class="opt-check"></span>Скачет — то плюс, то минус
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(3)">← Назад</button>
+      <button class="btn-next" id="next4" disabled onclick="goNext(5)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block" id="q5">
+    <div class="q-number">05 / 08</div>
+    <div class="q-text">Как вы себя чувствуете к середине дня?</div>
+    <div class="options" data-q="q5" data-type="single">
+      <button class="option" data-val="energy_good">
+        <span class="opt-check"></span>Энергия стабильная
+      </button>
+      <button class="option" data-val="energy_noon">
+        <span class="opt-check"></span>К обеду появляется усталость
+      </button>
+      <button class="option" data-val="energy_after">
+        <span class="opt-check"></span>После еды хочется лечь
+      </button>
+      <button class="option" data-val="energy_morning">
+        <span class="opt-check"></span>Устала уже с утра
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(4)">← Назад</button>
+      <button class="btn-next" id="next5" disabled onclick="goNext(6)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block" id="q6">
+    <div class="q-number">06 / 08</div>
+    <div class="q-text">Как часто у вас бывает что-то из этого?</div>
+    <div class="q-sub">Выберите всё, что есть</div>
+    <div class="options" data-q="q6" data-type="multi">
+      <button class="option multi" data-val="anxiety">
+        <span class="opt-check"></span>Тревога или раздражительность без причины
+      </button>
+      <button class="option multi" data-val="flashes">
+        <span class="opt-check"></span>Приливы жара или резкие перепады температуры
+      </button>
+      <button class="option multi" data-val="brainfog">
+        <span class="opt-check"></span>Туман в голове, трудно сосредоточиться
+      </button>
+      <button class="option multi" data-val="cold_hands">
+        <span class="opt-check"></span>Холодные руки или ноги при нормальной температуре
+      </button>
+      <button class="option multi" data-val="bloating">
+        <span class="opt-check"></span>Вздутие или дискомфорт после еды
+      </button>
+      <button class="option multi" data-val="none_sym">
+        <span class="opt-check"></span>Ничего из этого
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(5)">← Назад</button>
+      <button class="btn-next" id="next6" disabled onclick="goNext(7)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-block" id="q7">
+    <div class="q-number">07 / 08</div>
+    <div class="q-text">Вы сдавали анализы за последний год?</div>
+    <div class="options" data-q="q7" data-type="single">
+      <button class="option" data-val="tests_norm_bad">
+        <span class="opt-check"></span>Да, всё в норме — но чувствую себя плохо
+      </button>
+      <button class="option" data-val="tests_deviation">
+        <span class="opt-check"></span>Да, нашли отклонения — сейчас разбираюсь
+      </button>
+      <button class="option" data-val="tests_old">
+        <span class="opt-check"></span>Давно не сдавала, не знаю своей картины
+      </button>
+      <button class="option" data-val="tests_unclear">
+        <span class="opt-check"></span>Сдавала, но никто толком не объяснил результаты
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(6)">← Назад</button>
+      <button class="btn-next" id="next7" disabled onclick="goNext(8)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-block" id="q8">
+    <div class="q-number">08 / 08</div>
+    <div class="q-text">Что вы уже пробовали?</div>
+    <div class="q-sub">Выберите всё, что пробовали</div>
+    <div class="options" data-q="q8" data-type="multi">
+      <button class="option multi" data-val="diets">
+        <span class="opt-check"></span>Диеты или ограничения в питании
+      </button>
+      <button class="option multi" data-val="bads">
+        <span class="opt-check"></span>БАДы — сама назначила по статьям или советам
+      </button>
+      <button class="option multi" data-val="specialists">
+        <span class="opt-check"></span>Обращалась к специалистам — помогло частично или не помогло
+      </button>
+      <button class="option multi" data-val="ai_search">
+        <span class="opt-check"></span>Спрашивала у нейросети или читала медицинские статьи
+      </button>
+      <button class="option multi" data-val="nothing">
+        <span class="opt-check"></span>Ничего ещё не пробовала, только начинаю разбираться
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(7)">← Назад</button>
+      <button class="btn-next" id="next8" disabled onclick="showResult()">Получить результат →</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-block" id="loadingBlock">
+    <div class="loader-ring"></div>
+    <div class="loading-text">Анализирую ваши ответы...</div>
+    <div class="loading-sub">Составляю персональную карту состояния</div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-block" id="resultBlock">
+    <div class="result-header">
+      <div class="result-tag">Ваша карта здоровья</div>
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-subtitle" id="resultSubtitle"></div>
+    </div>
+    <div class="result-body">
+      <div class="result-section">
+        <div class="result-section-label">Что происходит в вашем теле</div>
+        <p id="resultBody"></p>
+      </div>
+      <div class="result-signals">
+        <div class="result-signals-label">Сигналы, которые важно не игнорировать</div>
+        <div id="resultSignals"></div>
+      </div>
+      <div class="result-section">
+        <div class="result-section-label">Что с этим делает Ольга</div>
+        <p id="resultApproach"></p>
+      </div>
+
+      <div class="cta-block">
+        <h3 id="ctaTitle">Узнать, что именно происходит именно с вами</h3>
+        <p id="ctaText">Ольга разберёт вашу ситуацию, анализы и историю — и скажет, что делать конкретно в вашем случае.</p>
+        <a id="ctaMain" href="#" target="_blank" class="btn-cta-main">Отправить результат Ольге →</a>
+        <a id="ctaSecondary" href="#" target="_blank" class="btn-cta-secondary">Это не про меня — хочу разобраться</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>@kokoeva_doctor · Нутрициолог с медицинским образованием<br>
+  Вопросы <a href="https://t.me/imenno_ta">@imenno_ta</a></p>
+</div>
+
+<script>
+  const answers = {};
+
+  // Determine segment from answers
+  function getSegment() {
+    const age = answers.q1;
+    const situation = answers.q2;
+    const symptoms = answers.q6 || [];
+
+    // Segment 1: Женщина 40+ / перименопауза / ГЗТ
+    if (
+      (age === '45-60' || age === 'over60') ||
+      situation === 'hormones' ||
+      symptoms.includes('flashes')
+    ) {
+      return 'hormones';
+    }
+
+    // Segment 2: Тревожный про здоровье
+    if (
+      situation === 'diagnosis' ||
+      answers.q7 === 'tests_deviation' ||
+      answers.q7 === 'tests_norm_bad' ||
+      (answers.q8 || []).includes('ai_search')
+    ) {
+      return 'diagnosis';
+    }
+
+    // Segment 3: Мама в перезапуске
+    if (situation === 'mama') {
+      return 'mama';
+    }
+
+    // Default fallback
+    if (age === 'under35' || age === '35-44') return 'mama';
+    return 'hormones';
+  }
+
+  const results = {
+    hormones: {
+      title: 'Тело в точке перехода.',
+      subtitle: 'Вы не сломаны и не "просто стареете". Это процессы, у которых есть причины — и решения.',
+      body: 'Вы сдали анализы — сказали "норма". Но вы просыпаетесь в 3 ночи. Жар накатывает волной. Вес ползёт вверх, хотя вы едите меньше, чем пять лет назад. Врач говорит "возраст". Подруги говорят "у всех так". А вы думаете — неужели вот так теперь и будет?\n\nНет. Это дефицит магния, который никто не проверил. Кортизол, который съедает прогестерон. Питание, которое работало в 35 — и перестало работать в 45.',
+      signals: [
+        'Нарушение сна — особенно пробуждение в 2–4 ночи — это гормональный сигнал, не просто стресс',
+        'Вес при "нормальных" анализах — инсулинорезистентность и дефициты часто не попадают в стандартные нормы',
+        'Приливы жара — не просто симптом климакса, а маркер состояния нервной системы и питания',
+        'Усталость после сна — часто сигнал о дефиците B12, ферритина или нарушении работы щитовидки'
+      ],
+      approach: 'Ольга смотрит на тело целиком — питание, гормоны, нервную систему и голову одновременно. Не по очереди. Когда видишь всё сразу — картина складывается за первую же консультацию. И становится понятно, что делать.',
+      ctaTitle: 'Разобрать вашу ситуацию с Ольгой',
+      ctaText: 'Ольга разберёт анализы, симптомы и историю — и скажет, что происходит конкретно с вами.',
+      igText: 'Я прошла Карту здоровья. Мой результат: Тело в точке перехода (40+, гормоны). Хочу разобраться подробнее.'
+    },
+    diagnosis: {
+      title: 'Тело подаёт сигналы.',
+      subtitle: 'Диагноз — не приговор. Но нейросеть и статьи не заменят того, кто видит вас целиком.',
+      body: 'Тебе поставили диагноз — или ты сама нашла что-то в анализах, что напугало. С тех пор читаешь всё подряд, задаёшь вопросы в чатах. Забиваешь результаты в нейросеть. Она отвечает связно, уверенно, со ссылками. Но она не видит, как ты спишь. Не знает, что ты ела последние три года. Не чувствует, что у тебя уже полгода холодные руки при нормальном гемоглобине. Нейросеть видит текст. Не тело.\n\nСтрашно не столько сам диагноз. Страшно ощущение, что ты не понимаешь, что происходит внутри.',
+      signals: [
+        'Анализы "в норме" при плохом самочувствии — нормы лабораторий не равны оптимальным значениям для вашего тела',
+        'Холодные руки при нормальном гемоглобине — может говорить о скрытом дефиците ферритина или функции щитовидки',
+        'Препараты работают частично — питание может как усиливать, так и блокировать действие лекарств',
+        'Тревога после чтения анализов — признак того, что нужна живая экспертиза, не алгоритм'
+      ],
+      approach: 'Питание при твоём состоянии — это не "ешь больше овощей". Это работа с тем, что не усваивается, что воспаляет, что мешает лекарствам работать. Разбирается по анализам, по симптомам, по твоей истории — не по протоколу для всех.',
+      ctaTitle: 'Получить живую экспертизу',
+      ctaText: 'Ольга посмотрит на вашу ситуацию как специалист с медицинским образованием — не как алгоритм.',
+      igText: 'Я прошла Карту здоровья. Мой результат: Тело подаёт сигналы (диагноз / тревожные анализы). Хочу разобраться подробнее.'
+    },
+    mama: {
+      title: 'Время вернуться к себе.',
+      subtitle: 'Усталость, которую сон не убирает — это не слабость и не "надо просто взять себя в руки".',
+      body: 'Дети выросли — или просто стали чуть самостоятельнее. Появилось окно. Не огромное, но твоё. И ты поняла, что не знаешь, что с ним делать. Потому что последние лет десять ты знала только одно — что нужно другим.\n\nУсталость, которую сон не убирает. Вес, который появился непонятно откуда и не уходит ни от чего. Настроение, которое скачет без видимой причины. Ты берёшь себя в руки. Через неделю всё то же самое.',
+      signals: [
+        'Усталость после полноценного сна — сигнал о дефицитах (ферритин, D3, B12), а не о лени',
+        'Вес, который "пришёл" и не уходит — часто связан с кортизолом и инсулинорезистентностью от хронического стресса',
+        'Перепады настроения без причины — могут говорить о дефиците магния и нарушении работы нейромедиаторов',
+        'Нет энергии на себя — не психологический барьер, а физиологический: тело работало на износ'
+      ],
+      approach: 'Без работы с питанием, дефицитами и нервной системой одновременно — не по очереди — тело не может восстановиться само. Именно сразу — потому что в этом случае всё это одно.',
+      ctaTitle: 'Начать возвращение к себе',
+      ctaText: 'Ольга поможет разобраться, что происходит с телом — и что делать конкретно в вашей ситуации.',
+      igText: 'Я прошла Карту здоровья. Мой результат: Время вернуться к себе (мама в перезапуске). Хочу разобраться подробнее.'
+    }
+  };
+
+  function buildIgLink(text) {
+    return `https://ig.me/m/kokoeva_doctor?text=${encodeURIComponent(text)}`;
+  }
+
+  function showResult() {
+    // Collect q8 before showing
+    document.getElementById('q8').classList.remove('active');
+    document.getElementById('loadingBlock').classList.add('active');
+
+    setTimeout(() => {
+      document.getElementById('loadingBlock').classList.remove('active');
+
+      const seg = getSegment();
+      const r = results[seg];
+
+      document.getElementById('resultTitle').textContent = r.title;
+      document.getElementById('resultSubtitle').textContent = r.subtitle;
+      document.getElementById('resultBody').innerHTML = r.body.replace(/\n/g, '<br><br>');
+      document.getElementById('resultApproach').textContent = r.approach;
+      document.getElementById('ctaTitle').textContent = r.ctaTitle;
+      document.getElementById('ctaText').textContent = r.ctaText;
+
+      // Signals
+      const signalsEl = document.getElementById('resultSignals');
+      signalsEl.innerHTML = r.signals.map(s => `
+        <div class="signal-item">
+          <div class="signal-dot"></div>
+          <span>${s}</span>
+        </div>
+      `).join('');
+
+      // CTA links
+      document.getElementById('ctaMain').href = buildIgLink(r.igText);
+      document.getElementById('ctaSecondary').href = 'https://t.me/imenno_ta';
+
+      document.getElementById('resultBlock').classList.add('active');
+
+      // Update progress
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = 'Готово';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2000);
+  }
+
+  function goNext(num) {
+    document.getElementById(`q${num - 1}`).classList.remove('active');
+    document.getElementById(`q${num}`).classList.add('active');
+    updateProgress(num);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(num) {
+    document.getElementById(`q${num + 1}`).classList.remove('active');
+    document.getElementById(`q${num}`).classList.add('active');
+    updateProgress(num);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress(qNum) {
+    const pct = ((qNum - 1) / 8) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `Вопрос ${qNum} из 8`;
+  }
+
+  // Option click handling
+  document.addEventListener('click', function(e) {
+    const opt = e.target.closest('.option');
+    if (!opt) return;
+
+    const container = opt.closest('.options');
+    const qKey = container.dataset.q;
+    const type = container.dataset.type;
+    const val = opt.dataset.val;
+
+    if (type === 'single') {
+      container.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[qKey] = val;
+
+      // Auto-enable next button
+      const qNum = parseInt(qKey.replace('q', ''));
+      const nextBtn = document.getElementById(`next${qNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+
+    } else if (type === 'multi') {
+      // none_sym deselects others
+      if (val === 'none_sym' || val === 'nothing') {
+        container.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        answers[qKey] = [val];
+      } else {
+        // deselect "none" option if present
+        container.querySelectorAll('.option').forEach(o => {
+          if (o.dataset.val === 'none_sym' || o.dataset.val === 'nothing') {
+            o.classList.remove('selected');
+          }
+        });
+        opt.classList.toggle('selected');
+        const selected = [...container.querySelectorAll('.option.selected')].map(o => o.dataset.val);
+        answers[qKey] = selected;
+      }
+
+      const qNum = parseInt(qKey.replace('q', ''));
+      const nextBtn = document.getElementById(`next${qNum}`);
+      const anySelected = container.querySelectorAll('.option.selected').length > 0;
+      if (nextBtn) nextBtn.disabled = !anySelected;
+    }
+  });
+</script>
+</body>
+</html>
