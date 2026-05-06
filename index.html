@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -556,10 +557,10 @@
 <div class="hero">
   <div class="hero-tag">Ольга Кокоева · Нутрициолог</div>
   <h1>Карта здоровья.<br><em>Проверь себя.</em></h1>
-  <p>8 вопросов, которые заменят год хождения по врачам</p>
+  <p>10 вопросов, которые заменят год хождения по врачам</p>
   <div class="hero-author">
     <div class="hero-author-dot"></div>
-    <span>22 года в медицине · нутрициолог · нутрициолог-реаниматолог</span>
+    <span>22 года в медицине · нутрициолог · врач-реаниматолог · психолог</span>
   </div>
 </div>
 
@@ -567,14 +568,14 @@
   <div class="progress-bar-track">
     <div class="progress-bar-fill" id="progressFill"></div>
   </div>
-  <div class="progress-text" id="progressText">Вопрос 1 из 8</div>
+  <div class="progress-text" id="progressText">Вопрос 1 из 10</div>
 </div>
 
 <div class="quiz-wrap">
 
-  <!-- Q1 -->
+  <!-- Q1: Возраст (фильтрация) -->
   <div class="question-block active" id="q1">
-    <div class="q-number">01 / 08</div>
+    <div class="q-number">01 / 10</div>
     <div class="q-text">Сколько вам лет?</div>
     <div class="options" data-q="q1" data-type="single">
       <button class="option" data-val="under35">
@@ -595,22 +596,22 @@
     </div>
   </div>
 
-  <!-- Q2 -->
+  <!-- Q2: Цикл / менопауза (С1) -->
   <div class="question-block" id="q2">
-    <div class="q-number">02 / 08</div>
-    <div class="q-text">Что сейчас больше всего описывает вашу ситуацию?</div>
+    <div class="q-number">02 / 10</div>
+    <div class="q-text">Что происходит с циклом или менопаузой?</div>
     <div class="options" data-q="q2" data-type="single">
-      <button class="option" data-val="mama">
-        <span class="opt-check"></span>Я мама, дети подросли — хочу наконец заняться собой
+      <button class="option" data-val="cycle_ok">
+        <span class="opt-check"></span>Цикл регулярный, проблем нет
       </button>
-      <button class="option" data-val="diagnosis">
-        <span class="opt-check"></span>У меня есть диагноз или тревожные анализы — хочу понять, что делать
+      <button class="option" data-val="cycle_irregular">
+        <span class="opt-check"></span>Цикл сбился, стал нерегулярным или болезненным
       </button>
-      <button class="option" data-val="hormones">
-        <span class="opt-check"></span>Тело изменилось после 40 — вес, энергия, сон, гормоны
+      <button class="option" data-val="meno_hard">
+        <span class="opt-check"></span>Менопауза наступила — но самочувствие тяжёлое
       </button>
-      <button class="option" data-val="unknown">
-        <span class="opt-check"></span>Просто чувствую, что что-то не так — но не знаю что именно
+      <button class="option" data-val="kok_after">
+        <span class="opt-check"></span>Принимала КОК или ГЗТ — после отмены пошёл сбой
       </button>
     </div>
     <div class="nav-row">
@@ -619,11 +620,35 @@
     </div>
   </div>
 
-  <!-- Q3 -->
+  <!-- Q3: Терморегуляция (С1) -->
   <div class="question-block" id="q3">
-    <div class="q-number">03 / 08</div>
-    <div class="q-text">Как вы спите?</div>
+    <div class="q-number">03 / 10</div>
+    <div class="q-text">Что с теплом и приливами?</div>
     <div class="options" data-q="q3" data-type="single">
+      <button class="option" data-val="temp_ok">
+        <span class="opt-check"></span>Всё нормально
+      </button>
+      <button class="option" data-val="temp_flashes">
+        <span class="opt-check"></span>Бывают приливы или ночная потливость
+      </button>
+      <button class="option" data-val="temp_cold">
+        <span class="opt-check"></span>Постоянно холодные руки и ноги
+      </button>
+      <button class="option" data-val="temp_both">
+        <span class="opt-check"></span>И то, и другое — тело не понимает, жарко или холодно
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(2)">← Назад</button>
+      <button class="btn-next" id="next3" disabled onclick="goNext(4)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q4: Сон (универсальный) -->
+  <div class="question-block" id="q4">
+    <div class="q-number">04 / 10</div>
+    <div class="q-text">Как вы спите?</div>
+    <div class="options" data-q="q4" data-type="single">
       <button class="option" data-val="sleep_good">
         <span class="opt-check"></span>Сплю хорошо, высыпаюсь
       </button>
@@ -638,21 +663,21 @@
       </button>
     </div>
     <div class="nav-row">
-      <button class="btn-back" onclick="goBack(2)">← Назад</button>
-      <button class="btn-next" id="next3" disabled onclick="goNext(4)">Далее →</button>
+      <button class="btn-back" onclick="goBack(3)">← Назад</button>
+      <button class="btn-next" id="next4" disabled onclick="goNext(5)">Далее →</button>
     </div>
   </div>
 
-  <!-- Q4 -->
-  <div class="question-block" id="q4">
-    <div class="q-number">04 / 08</div>
+  <!-- Q5: Вес (С1+С3) -->
+  <div class="question-block" id="q5">
+    <div class="q-number">05 / 10</div>
     <div class="q-text">Что происходит с весом?</div>
-    <div class="options" data-q="q4" data-type="single">
+    <div class="options" data-q="q5" data-type="single">
       <button class="option" data-val="weight_ok">
         <span class="opt-check"></span>Стабильный, меня устраивает
       </button>
       <button class="option" data-val="weight_up">
-        <span class="opt-check"></span>Растёт, хотя я ем не больше чем раньше
+        <span class="opt-check"></span>Растёт, хотя я ем не больше прежнего
       </button>
       <button class="option" data-val="weight_stuck">
         <span class="opt-check"></span>Не могу сдвинуть с места несмотря на усилия
@@ -662,58 +687,27 @@
       </button>
     </div>
     <div class="nav-row">
-      <button class="btn-back" onclick="goBack(3)">← Назад</button>
-      <button class="btn-next" id="next4" disabled onclick="goNext(5)">Далее →</button>
-    </div>
-  </div>
-
-  <!-- Q5 -->
-  <div class="question-block" id="q5">
-    <div class="q-number">05 / 08</div>
-    <div class="q-text">Как вы себя чувствуете к середине дня?</div>
-    <div class="options" data-q="q5" data-type="single">
-      <button class="option" data-val="energy_good">
-        <span class="opt-check"></span>Энергия стабильная
-      </button>
-      <button class="option" data-val="energy_noon">
-        <span class="opt-check"></span>К обеду появляется усталость
-      </button>
-      <button class="option" data-val="energy_after">
-        <span class="opt-check"></span>После еды хочется лечь
-      </button>
-      <button class="option" data-val="energy_morning">
-        <span class="opt-check"></span>Устала уже с утра
-      </button>
-    </div>
-    <div class="nav-row">
       <button class="btn-back" onclick="goBack(4)">← Назад</button>
       <button class="btn-next" id="next5" disabled onclick="goNext(6)">Далее →</button>
     </div>
   </div>
 
-  <!-- Q6 -->
+  <!-- Q6: Энергия и усталость -->
   <div class="question-block" id="q6">
-    <div class="q-number">06 / 08</div>
-    <div class="q-text">Как часто у вас бывает что-то из этого?</div>
-    <div class="q-sub">Выберите всё, что есть</div>
-    <div class="options" data-q="q6" data-type="multi">
-      <button class="option multi" data-val="anxiety">
-        <span class="opt-check"></span>Тревога или раздражительность без причины
+    <div class="q-number">06 / 10</div>
+    <div class="q-text">Как у вас с энергией?</div>
+    <div class="options" data-q="q6" data-type="single">
+      <button class="option" data-val="energy_good">
+        <span class="opt-check"></span>Энергии хватает на день
       </button>
-      <button class="option multi" data-val="flashes">
-        <span class="opt-check"></span>Приливы жара или резкие перепады температуры
+      <button class="option" data-val="energy_noon">
+        <span class="opt-check"></span>К обеду уже выжата
       </button>
-      <button class="option multi" data-val="brainfog">
-        <span class="opt-check"></span>Туман в голове, трудно сосредоточиться
+      <button class="option" data-val="energy_morning">
+        <span class="opt-check"></span>Устала ещё до того, как день начался
       </button>
-      <button class="option multi" data-val="cold_hands">
-        <span class="opt-check"></span>Холодные руки или ноги при нормальной температуре
-      </button>
-      <button class="option multi" data-val="bloating">
-        <span class="opt-check"></span>Вздутие или дискомфорт после еды
-      </button>
-      <button class="option multi" data-val="none_sym">
-        <span class="opt-check"></span>Ничего из этого
+      <button class="option" data-val="energy_chronic">
+        <span class="opt-check"></span>Усталость не уходит даже после сна и отдыха
       </button>
     </div>
     <div class="nav-row">
@@ -722,16 +716,43 @@
     </div>
   </div>
 
-  <!-- Q7 -->
+  <!-- Q7: ЖКТ (С3+С2) -->
   <div class="question-block" id="q7">
-    <div class="q-number">07 / 08</div>
-    <div class="q-text">Вы сдавали анализы за последний год?</div>
+    <div class="q-number">07 / 10</div>
+    <div class="q-text">Что с пищеварением?</div>
     <div class="options" data-q="q7" data-type="single">
+      <button class="option" data-val="gi_ok">
+        <span class="opt-check"></span>С пищеварением всё в порядке
+      </button>
+      <button class="option" data-val="gi_bloat">
+        <span class="opt-check"></span>Вздутие или тяжесть после еды
+      </button>
+      <button class="option" data-val="gi_stool">
+        <span class="opt-check"></span>Запоры или диарея — регулярно
+      </button>
+      <button class="option" data-val="gi_diag">
+        <span class="opt-check"></span>Удалён желчный или поставлен диагноз по ЖКТ
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(6)">← Назад</button>
+      <button class="btn-next" id="next7" disabled onclick="goNext(8)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q8: Анализы и диагнозы (С2 — ключевой) -->
+  <div class="question-block" id="q8">
+    <div class="q-number">08 / 10</div>
+    <div class="q-text">Что у вас с анализами и диагнозами?</div>
+    <div class="options" data-q="q8" data-type="single">
       <button class="option" data-val="tests_norm_bad">
-        <span class="opt-check"></span>Да, всё в норме — но чувствую себя плохо
+        <span class="opt-check"></span>Анализы в норме — но самочувствие плохое
       </button>
       <button class="option" data-val="tests_deviation">
-        <span class="opt-check"></span>Да, нашли отклонения — сейчас разбираюсь
+        <span class="opt-check"></span>Нашли отклонения: холестерин, сахар, ферритин или гормоны
+      </button>
+      <button class="option" data-val="tests_diag">
+        <span class="opt-check"></span>Есть диагноз: щитовидка, инсулинорезистентность, гепатоз, диабет
       </button>
       <button class="option" data-val="tests_old">
         <span class="opt-check"></span>Давно не сдавала, не знаю своей картины
@@ -741,17 +762,54 @@
       </button>
     </div>
     <div class="nav-row">
-      <button class="btn-back" onclick="goBack(6)">← Назад</button>
-      <button class="btn-next" id="next7" disabled onclick="goNext(8)">Далее →</button>
+      <button class="btn-back" onclick="goBack(7)">← Назад</button>
+      <button class="btn-next" id="next8" disabled onclick="goNext(9)">Далее →</button>
     </div>
   </div>
 
-  <!-- Q8 -->
-  <div class="question-block" id="q8">
-    <div class="q-number">08 / 08</div>
+  <!-- Q9: Симптомы-маркеры (мульти) -->
+  <div class="question-block" id="q9">
+    <div class="q-number">09 / 10</div>
+    <div class="q-text">Что из этого у вас бывает?</div>
+    <div class="q-sub">Выберите всё, что есть</div>
+    <div class="options" data-q="q9" data-type="multi">
+      <button class="option multi" data-val="anxiety">
+        <span class="opt-check"></span>Тревога или раздражительность без причины
+      </button>
+      <button class="option multi" data-val="brainfog">
+        <span class="opt-check"></span>Туман в голове, трудно сосредоточиться
+      </button>
+      <button class="option multi" data-val="hair_nails">
+        <span class="opt-check"></span>Выпадают волосы, ломкие ногти
+      </button>
+      <button class="option multi" data-val="skin">
+        <span class="opt-check"></span>Кожа: высыпания, тусклость, аллергии
+      </button>
+      <button class="option multi" data-val="cravings">
+        <span class="opt-check"></span>Тяга к сладкому или мучному не контролируется
+      </button>
+      <button class="option multi" data-val="immunity">
+        <span class="opt-check"></span>Частые ОРВИ, иммунитет слабый
+      </button>
+      <button class="option multi" data-val="pressure">
+        <span class="opt-check"></span>Давление скачет или повышено
+      </button>
+      <button class="option multi" data-val="none_sym">
+        <span class="opt-check"></span>Ничего из этого
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack(8)">← Назад</button>
+      <button class="btn-next" id="next9" disabled onclick="goNext(10)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- Q10: Что пробовали (мульти) -->
+  <div class="question-block" id="q10">
+    <div class="q-number">10 / 10</div>
     <div class="q-text">Что вы уже пробовали?</div>
     <div class="q-sub">Выберите всё, что пробовали</div>
-    <div class="options" data-q="q8" data-type="multi">
+    <div class="options" data-q="q10" data-type="multi">
       <button class="option multi" data-val="diets">
         <span class="opt-check"></span>Диеты или ограничения в питании
       </button>
@@ -769,8 +827,8 @@
       </button>
     </div>
     <div class="nav-row">
-      <button class="btn-back" onclick="goBack(7)">← Назад</button>
-      <button class="btn-next" id="next8" disabled onclick="showResult()">Получить результат →</button>
+      <button class="btn-back" onclick="goBack(9)">← Назад</button>
+      <button class="btn-next" id="next10" disabled onclick="showResult()">Получить результат →</button>
     </div>
   </div>
 
@@ -790,23 +848,39 @@
     </div>
     <div class="result-body">
       <div class="result-section">
-        <div class="result-section-label">Что происходит в вашем теле</div>
-        <p id="resultBody"></p>
+        <div class="result-section-label">Узнаёте себя?</div>
+        <p id="resultMirror"></p>
       </div>
-      <div class="result-signals">
-        <div class="result-signals-label">Сигналы, которые важно не игнорировать</div>
-        <div id="resultSignals"></div>
-      </div>
+
       <div class="result-section">
-        <div class="result-section-label">Что с этим делает Ольга</div>
-        <p id="resultApproach"></p>
+        <div class="result-section-label">Что происходит на самом деле</div>
+        <p id="resultWhatHappens"></p>
+      </div>
+
+      <div class="result-signals">
+        <div class="result-signals-label">Если оставить как есть</div>
+        <p id="resultIfIgnore" style="margin: 0; color: var(--text); line-height: 1.6;"></p>
+      </div>
+
+      <div class="result-section">
+        <div class="result-section-label">Если разобраться сейчас</div>
+        <p id="resultIfAct"></p>
+      </div>
+
+      <div class="result-section">
+        <div class="result-section-label">Почему именно Ольга</div>
+        <p id="resultWhyOlga"></p>
+      </div>
+
+      <div class="result-section">
+        <div class="result-section-label">Какой путь выбрать</div>
+        <p id="resultChoice"></p>
       </div>
 
       <div class="cta-block">
-        <h3 id="ctaTitle">Узнать, что именно происходит именно с вами</h3>
-        <p id="ctaText">Ольга разберёт вашу ситуацию, анализы и историю — и скажет, что делать конкретно в вашем случае.</p>
-        <a id="ctaMain" href="#" target="_blank" class="btn-cta-main">Отправить результат Ольге →</a>
-        <a id="ctaSecondary" href="#" target="_blank" class="btn-cta-secondary">Это не про меня — хочу разобраться</a>
+        <h3 id="ctaTitle">Узнать, какой формат подойдёт вам</h3>
+        <a id="ctaMain" href="#" target="_blank" class="btn-cta-main">Написать Ольге →</a>
+        <a id="ctaSecondary" href="#" target="_blank" class="btn-cta-secondary">Ваш тест не про меня — написать в службу заботы</a>
       </div>
     </div>
   </div>
@@ -821,86 +895,164 @@
 <script>
   const answers = {};
 
-  // Determine segment from answers
+  // Карта тегов: каждый ответ даёт баллы в один или несколько сегментов
+  const tagMap = {
+    // Q1: возраст (мягкая фильтрация — без жёсткого баллирования)
+    q1: {
+      'under35':  { c3: 1 },
+      '35-44':    { c3: 1 },
+      '45-60':    { c1: 2 },
+      'over60':   { c1: 2 }
+    },
+    // Q2: цикл / менопауза
+    q2: {
+      'cycle_ok':        {},
+      'cycle_irregular': { c1: 2 },
+      'meno_hard':       { c1: 3 },
+      'kok_after':       { c1: 3 }
+    },
+    // Q3: терморегуляция
+    q3: {
+      'temp_ok':      {},
+      'temp_flashes': { c1: 3 },
+      'temp_cold':    { c2: 2 },
+      'temp_both':    { c1: 2, c2: 1 }
+    },
+    // Q4: сон
+    q4: {
+      'sleep_good':   {},
+      'sleep_hard':   { c1: 1, c3: 1 },
+      'sleep_tired':  { c2: 1, c3: 1 },
+      'sleep_broken': { c1: 1, c3: 1 }
+    },
+    // Q5: вес
+    q5: {
+      'weight_ok':    {},
+      'weight_up':    { c1: 2, c3: 1 },
+      'weight_stuck': { c2: 1, c3: 2 },
+      'weight_jump':  { c1: 1, c2: 1 }
+    },
+    // Q6: энергия
+    q6: {
+      'energy_good':    {},
+      'energy_noon':    { c3: 2 },
+      'energy_morning': { c3: 2, c2: 1 },
+      'energy_chronic': { c2: 2, c1: 1 }
+    },
+    // Q7: ЖКТ
+    q7: {
+      'gi_ok':    {},
+      'gi_bloat': { c3: 2 },
+      'gi_stool': { c3: 2, c2: 1 },
+      'gi_diag':  { c2: 3 }
+    },
+    // Q8: анализы и диагнозы
+    q8: {
+      'tests_norm_bad':   { c2: 3 },
+      'tests_deviation':  { c2: 3 },
+      'tests_diag':       { c2: 3 },
+      'tests_old':        { c3: 1 },
+      'tests_unclear':    { c2: 2 }
+    },
+    // Q9: симптомы (мульти)
+    q9: {
+      'anxiety':    { c1: 1, c2: 1 },
+      'brainfog':   { c1: 1, c3: 1 },
+      'hair_nails': { c1: 2 },
+      'skin':       { c3: 2 },
+      'cravings':   { c3: 2 },
+      'immunity':   { c3: 2 },
+      'pressure':   { c2: 2 },
+      'none_sym':   {}
+    },
+    // Q10: что пробовали (мульти, нейтральные баллы — формирует историю, не сегмент)
+    q10: {
+      'diets':       { c3: 1 },
+      'bads':        { c2: 1 },
+      'specialists': { c2: 1 },
+      'ai_search':   { c2: 2 },
+      'nothing':     {}
+    }
+  };
+
+  // Подсчёт доминирующего сегмента
   function getSegment() {
-    const age = answers.q1;
-    const situation = answers.q2;
-    const symptoms = answers.q6 || [];
+    const score = { c1: 0, c2: 0, c3: 0 };
 
-    // Segment 1: Женщина 40+ / перименопауза / ГЗТ
-    if (
-      (age === '45-60' || age === 'over60') ||
-      situation === 'hormones' ||
-      symptoms.includes('flashes')
-    ) {
-      return 'hormones';
-    }
+    Object.keys(tagMap).forEach(qKey => {
+      const ans = answers[qKey];
+      if (!ans) return;
 
-    // Segment 2: Тревожный про здоровье
-    if (
-      situation === 'diagnosis' ||
-      answers.q7 === 'tests_deviation' ||
-      answers.q7 === 'tests_norm_bad' ||
-      (answers.q8 || []).includes('ai_search')
-    ) {
-      return 'diagnosis';
-    }
+      const arr = Array.isArray(ans) ? ans : [ans];
+      arr.forEach(val => {
+        const tags = tagMap[qKey][val] || {};
+        Object.keys(tags).forEach(seg => {
+          score[seg] += tags[seg];
+        });
+      });
+    });
 
-    // Segment 3: Мама в перезапуске
-    if (situation === 'mama') {
-      return 'mama';
-    }
-
-    // Default fallback
-    if (age === 'under35' || age === '35-44') return 'mama';
-    return 'hormones';
+    // Возвращаем сегмент с максимальным баллом
+    // При равенстве: приоритет С1 (если 45+) → С2 → С3
+    const max = Math.max(score.c1, score.c2, score.c3);
+    if (score.c1 === max) return 'hormones';
+    if (score.c2 === max) return 'diagnosis';
+    return 'mama';
   }
 
   const results = {
+    // ============================================
+    // С1 · Перименопауза / гормоны
+    // ============================================
     hormones: {
-      title: 'Тело в точке перехода.',
-      subtitle: 'Вы не сломаны и не "просто стареете". Это процессы, у которых есть причины — и решения.',
-      body: 'Вы сдали анализы — сказали "норма". Но вы просыпаетесь в 3 ночи. Жар накатывает волной. Вес ползёт вверх, хотя вы едите меньше, чем пять лет назад. Врач говорит "возраст". Подруги говорят "у всех так". А вы думаете — неужели вот так теперь и будет?\n\nНет. Это дефицит магния, который никто не проверил. Кортизол, который съедает прогестерон. Питание, которое работало в 35 — и перестало работать в 45.',
-      signals: [
-        'Нарушение сна — особенно пробуждение в 2–4 ночи — это гормональный сигнал, не просто стресс',
-        'Вес при "нормальных" анализах — инсулинорезистентность и дефициты часто не попадают в стандартные нормы',
-        'Приливы жара — не просто симптом климакса, а маркер состояния нервной системы и питания',
-        'Усталость после сна — часто сигнал о дефиците B12, ферритина или нарушении работы щитовидки'
-      ],
-      approach: 'Ольга смотрит на тело целиком — питание, гормоны, нервную систему и голову одновременно. Не по очереди. Когда видишь всё сразу — картина складывается за первую же консультацию. И становится понятно, что делать.',
-      ctaTitle: 'Разобрать вашу ситуацию с Ольгой',
-      ctaText: 'Ольга разберёт анализы, симптомы и историю — и скажет, что происходит конкретно с вами.',
-      igText: 'Я прошла Карту здоровья. Мой результат: Тело в точке перехода (40+, гормоны). Хочу разобраться подробнее.'
+      title: 'Тело в точке гормонального перехода.',
+      subtitle: 'Это не «возраст, смиритесь». Это процесс, у которого есть причины — и которым можно управлять.',
+      // БЛОК 1 — Зеркало
+      mirror: 'Вы просыпаетесь в 3–4 ночи и больше не можете уснуть. Просыпаетесь уже уставшей. Вес ползёт вверх, хотя вы едите меньше, чем пять лет назад. Жар накатывает волной — посреди разговора, посреди сна. Вы смотрите в зеркало и узнаёте себя через раз. Делаете всё то же, что раньше — а тело отвечает иначе.',
+      // БЛОК 2 — Что происходит
+      whatHappens: 'Это перименопауза или ранний гормональный сдвиг. Эстроген и прогестерон падают неравномерно — отсюда приливы, тревога, бессонница, набор веса в животе. Кортизол съедает остатки прогестерона. Щитовидка тихо проседает. Дефицит ферритина и магния, который никто не проверил, добавляет туман в голове и усталость. Это не ваша вина и не лень. Это физиология, которой нужна точная поддержка — не «попейте витамины».',
+      // БЛОК 3 — Если оставить
+      ifIgnore: 'Если оставить как есть, через 2–3 года добавятся диагнозы, которых сейчас ещё нет: инсулинорезистентность, гипотиреоз, остеопороз. Вес и приливы усилятся. Самые активные годы — 45–60 — пройдут в режиме выживания, а не жизни.',
+      // БЛОК 4 — Если разобраться
+      ifAct: 'Если собрать систему сейчас — через 3–6 месяцев вы просыпаетесь отдохнувшей. Вес стабилизируется без диет. Приливы уходят или становятся редкими. Голова работает чётко. Вы возвращаете себе тело и десять лет качества жизни.',
+      // БЛОК 5 — Почему Ольга
+      whyOlga: 'У Ольги 22 года реанимации, нутрициология и психология в одном специалисте. Она не работает по протоколу «для всех 45+» — собирает программу под вашу гормональную картину, ваши анализы, вашу скорость. Видит весь пазл одновременно — гормоны, дефициты, ЖКТ, нервную систему — а не отдельные кусочки.',
+      // БЛОК 6 — Выбор
+      choice: 'Можно идти самостоятельно — читать форумы, пробовать БАДы, сдавать анализы наугад. Это нормальный путь. Он занимает несколько лет и стоит десятки тысяч на пробы и ошибки.\n\nМожно прийти к Ольге — на консультацию, на самостоятельный протокол, на частичное или полное сопровождение. Формат подбирается под вашу ситуацию: где-то достаточно одной встречи, где-то нужно идти месяцами рядом. Вы экономите годы и получаете систему, которая работает на вас.',
+      ctaTitle: 'Узнать, какой формат подойдёт вам',
+      igText: 'Я прошла Карту здоровья. Мой результат: гормональный переход (перименопауза, 40+). Хочу узнать, какая программа мне подойдёт.'
     },
+
+    // ============================================
+    // С2 · Тревожные про здоровье / диагнозы и анализы
+    // ============================================
     diagnosis: {
-      title: 'Тело подаёт сигналы.',
-      subtitle: 'Диагноз — не приговор. Но нейросеть и статьи не заменят того, кто видит вас целиком.',
-      body: 'Тебе поставили диагноз — или ты сама нашла что-то в анализах, что напугало. С тех пор читаешь всё подряд, задаёшь вопросы в чатах. Забиваешь результаты в нейросеть. Она отвечает связно, уверенно, со ссылками. Но она не видит, как ты спишь. Не знает, что ты ела последние три года. Не чувствует, что у тебя уже полгода холодные руки при нормальном гемоглобине. Нейросеть видит текст. Не тело.\n\nСтрашно не столько сам диагноз. Страшно ощущение, что ты не понимаешь, что происходит внутри.',
-      signals: [
-        'Анализы "в норме" при плохом самочувствии — нормы лабораторий не равны оптимальным значениям для вашего тела',
-        'Холодные руки при нормальном гемоглобине — может говорить о скрытом дефиците ферритина или функции щитовидки',
-        'Препараты работают частично — питание может как усиливать, так и блокировать действие лекарств',
-        'Тревога после чтения анализов — признак того, что нужна живая экспертиза, не алгоритм'
-      ],
-      approach: 'Питание при твоём состоянии — это не "ешь больше овощей". Это работа с тем, что не усваивается, что воспаляет, что мешает лекарствам работать. Разбирается по анализам, по симптомам, по твоей истории — не по протоколу для всех.',
-      ctaTitle: 'Получить живую экспертизу',
-      ctaText: 'Ольга посмотрит на вашу ситуацию как специалист с медицинским образованием — не как алгоритм.',
-      igText: 'Я прошла Карту здоровья. Мой результат: Тело подаёт сигналы (диагноз / тревожные анализы). Хочу разобраться подробнее.'
+      title: 'Тело подаёт сигналы — а ясности нет.',
+      subtitle: 'Анализы есть. Диагнозы есть. Понимания целостной картины — нет. И это можно исправить.',
+      mirror: 'У вас уже есть стопка анализов и, возможно, не один диагноз. Вы читаете медицинские статьи, забиваете результаты в нейросеть, спрашиваете в чатах. Один врач говорит одно, другой — другое. Что-то «в норме» — а вы себя плохо чувствуете. Что-то «отклонение» — но никто толком не объясняет, что с этим делать. Вы устали быть собственным следователем.',
+      whatHappens: 'Лабораторные нормы — это статистика по всем, а не оптимальные значения для вас. «Норма» ферритина по бланку и норма для женщины с выпадением волос — разные цифры. Холестерин, сахар, гормоны, печёночные показатели — это не отдельные истории, а одна общая картина обмена веществ. Когда её собирает один человек целиком, диагнозы и отклонения перестают быть пугающим хаосом и становятся понятной логикой.',
+      ifIgnore: 'Если продолжать собирать пазл по форумам, нейросетям и врачам по очереди — тревога будет только расти. К имеющимся отклонениям добавятся новые. Препараты, которые вы пьёте, могут работать в полсилы, потому что питание блокирует их усвоение. Через год-два ситуация усложнится в разы.',
+      ifAct: 'Если разобрать всё системно один раз — через 3–6 месяцев у вас на руках понятная карта: что в анализах что значит, что с этим делать в питании, что в дефицитах, как это сочетается с лекарствами. Тревога уходит, потому что появляется ясность. Самочувствие подтягивается за анализами.',
+      whyOlga: 'У Ольги 22 года реанимации — это значит, она читает анализы как клиницист, а не как «нутрициолог по картинкам». Плюс нутрициология плюс психология. Она видит, как холестерин, ЖКТ, щитовидка, гормоны и нервная система связаны — и собирает не «ещё одну рекомендацию», а целостную программу.',
+      choice: 'Можно продолжать собирать ясность по кусочкам — статьи, форумы, нейросеть, очередной специалист. Это бесплатно по деньгам, но дорого по времени и нервам.\n\nМожно прийти к Ольге — формат под вашу ситуацию: консультация для разбора текущей картины, самостоятельный протокол с инструкциями, частичное или полное сопровождение, если случай сложный. Вы получаете один источник правды вместо десяти разных мнений.',
+      ctaTitle: 'Узнать, какой формат подойдёт вам',
+      igText: 'Я прошла Карту здоровья. Мой результат: тревожные анализы и диагнозы, нужна ясность. Хочу узнать, какая программа мне подойдёт.'
     },
+
+    // ============================================
+    // С3 · Lifestyle мама / общая усталость и качество жизни
+    // ============================================
     mama: {
-      title: 'Время вернуться к себе.',
-      subtitle: 'Усталость, которую сон не убирает — это не слабость и не "надо просто взять себя в руки".',
-      body: 'Дети выросли — или просто стали чуть самостоятельнее. Появилось окно. Не огромное, но твоё. И ты поняла, что не знаешь, что с ним делать. Потому что последние лет десять ты знала только одно — что нужно другим.\n\nУсталость, которую сон не убирает. Вес, который появился непонятно откуда и не уходит ни от чего. Настроение, которое скачет без видимой причины. Ты берёшь себя в руки. Через неделю всё то же самое.',
-      signals: [
-        'Усталость после полноценного сна — сигнал о дефицитах (ферритин, D3, B12), а не о лени',
-        'Вес, который "пришёл" и не уходит — часто связан с кортизолом и инсулинорезистентностью от хронического стресса',
-        'Перепады настроения без причины — могут говорить о дефиците магния и нарушении работы нейромедиаторов',
-        'Нет энергии на себя — не психологический барьер, а физиологический: тело работало на износ'
-      ],
-      approach: 'Без работы с питанием, дефицитами и нервной системой одновременно — не по очереди — тело не может восстановиться само. Именно сразу — потому что в этом случае всё это одно.',
-      ctaTitle: 'Начать возвращение к себе',
-      ctaText: 'Ольга поможет разобраться, что происходит с телом — и что делать конкретно в вашей ситуации.',
-      igText: 'Я прошла Карту здоровья. Мой результат: Время вернуться к себе (мама в перезапуске). Хочу разобраться подробнее.'
+      title: 'Вы дошли до точки, где наконец появилось время на себя.',
+      subtitle: 'Это не лень и не «возьми себя в руки». Это тело, которое долго работало на других — и теперь просит инструкции.',
+      mirror: 'Дети подросли. Появилось окно — не огромное, но ваше. И вы поняли, что не знаете, что с ним делать. Усталость, которую не убирает ни сон, ни выходные. Вес, который пришёл непонятно откуда и не уходит ни от чего. Кожа и волосы стали другими. Тяга к сладкому, которую невозможно контролировать вечером. ЖКТ ведёт себя странно. Вы пробуете «взять себя в руки» — через неделю всё то же самое.',
+      whatHappens: 'Это не возраст и не характер. Это последствия лет, в которые тело отдавало больше, чем получало. Хронический стресс держит кортизол высоко — он блокирует похудение и съедает сон. Дефициты ферритина, B12, D3, магния копились годами и сейчас вылезают через волосы, кожу, усталость и тягу к сладкому. ЖКТ не справляется с привычным питанием. Это всё чинится — но не диетами и не БАДами по совету подруги.',
+      ifIgnore: 'Если оставить как есть — окно, которое наконец появилось, уйдёт на бесконечные «попробую с понедельника». Через пару лет добавится лишних 5–10 кг, инсулинорезистентность, проблемы с щитовидкой. Те самые годы, которые могли стать лучшими, пройдут в режиме «как-то себя дотягиваю».',
+      ifAct: 'Если собрать систему сейчас — через 3–6 месяцев у вас стабильная энергия с утра до вечера. Вес уходит без насилия. Кожа и волосы возвращаются. Тяга к сладкому уходит, потому что закрыты дефициты. Появляется тело, в котором хочется жить — и силы на ту жизнь, которую вы откладывали.',
+      whyOlga: 'У Ольги 22 года реанимации, нутрициология и психология. Она работает не «съешь больше овощей», а с настоящими причинами — дефициты, обмен, ЖКТ, нервная система — одновременно, не по очереди. Программа собирается под вашу скорость и вашу жизнь, а не под идеальную картинку из инстаграма.',
+      choice: 'Можно пробовать всё подряд — диеты, БАДы по советам, статьи, очередной курс. Это занимает годы и часто приводит обратно туда же.\n\nМожно прийти к Ольге — выбрать формат под себя: консультация, самостоятельный протокол, частичное сопровождение или полное, если хочется идти рядом. Один раз собрать систему, которая работает — и больше не возвращаться сюда через три года.',
+      ctaTitle: 'Узнать, какой формат подойдёт вам',
+      igText: 'Я прошла Карту здоровья. Мой результат: возвращение к себе после жизни на других. Хочу узнать, какая программа мне подойдёт.'
     }
   };
 
@@ -909,8 +1061,8 @@
   }
 
   function showResult() {
-    // Collect q8 before showing
-    document.getElementById('q8').classList.remove('active');
+    // Скрываем последний вопрос (q10)
+    document.getElementById('q10').classList.remove('active');
     document.getElementById('loadingBlock').classList.add('active');
 
     setTimeout(() => {
@@ -919,29 +1071,26 @@
       const seg = getSegment();
       const r = results[seg];
 
+      // Заголовок
       document.getElementById('resultTitle').textContent = r.title;
       document.getElementById('resultSubtitle').textContent = r.subtitle;
-      document.getElementById('resultBody').innerHTML = r.body.replace(/\n/g, '<br><br>');
-      document.getElementById('resultApproach').textContent = r.approach;
+
+      // 6 блоков финала
+      document.getElementById('resultMirror').innerHTML = r.mirror.replace(/\n/g, '<br><br>');
+      document.getElementById('resultWhatHappens').innerHTML = r.whatHappens.replace(/\n/g, '<br><br>');
+      document.getElementById('resultIfIgnore').innerHTML = r.ifIgnore.replace(/\n/g, '<br><br>');
+      document.getElementById('resultIfAct').innerHTML = r.ifAct.replace(/\n/g, '<br><br>');
+      document.getElementById('resultWhyOlga').innerHTML = r.whyOlga.replace(/\n/g, '<br><br>');
+      document.getElementById('resultChoice').innerHTML = r.choice.replace(/\n/g, '<br><br>');
+
+      // CTA
       document.getElementById('ctaTitle').textContent = r.ctaTitle;
-      document.getElementById('ctaText').textContent = r.ctaText;
-
-      // Signals
-      const signalsEl = document.getElementById('resultSignals');
-      signalsEl.innerHTML = r.signals.map(s => `
-        <div class="signal-item">
-          <div class="signal-dot"></div>
-          <span>${s}</span>
-        </div>
-      `).join('');
-
-      // CTA links
       document.getElementById('ctaMain').href = buildIgLink(r.igText);
       document.getElementById('ctaSecondary').href = 'https://t.me/imenno_ta';
 
       document.getElementById('resultBlock').classList.add('active');
 
-      // Update progress
+      // Прогресс
       document.getElementById('progressFill').style.width = '100%';
       document.getElementById('progressText').textContent = 'Готово';
 
@@ -953,20 +1102,31 @@
     document.getElementById(`q${num - 1}`).classList.remove('active');
     document.getElementById(`q${num}`).classList.add('active');
     updateProgress(num);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToProgressIfNeeded();
   }
 
   function goBack(num) {
     document.getElementById(`q${num + 1}`).classList.remove('active');
     document.getElementById(`q${num}`).classList.add('active');
     updateProgress(num);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToProgressIfNeeded();
+  }
+
+  // Скроллим к прогресс-бару только если он не виден (актуально для мобильных)
+  function scrollToProgressIfNeeded() {
+    const progressEl = document.querySelector('.progress-wrap');
+    if (!progressEl) return;
+    const rect = progressEl.getBoundingClientRect();
+    // Если прогресс-бар не виден сверху — подскроллим к нему
+    if (rect.top < 0 || rect.top > window.innerHeight * 0.3) {
+      progressEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function updateProgress(qNum) {
-    const pct = ((qNum - 1) / 8) * 100;
+    const pct = ((qNum - 1) / 10) * 100;
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = `Вопрос ${qNum} из 8`;
+    document.getElementById('progressText').textContent = `Вопрос ${qNum} из 10`;
   }
 
   // Option click handling
